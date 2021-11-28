@@ -8,7 +8,7 @@ import com.example.swapapp.models.Item;
 
 import java.util.ArrayList;
 
-public class ProfileViewModel extends ViewModel {
+public class  ProfileViewModel extends ViewModel {
   public static MutableLiveData<ArrayList<Item>> items;
 
   public ProfileViewModel() {

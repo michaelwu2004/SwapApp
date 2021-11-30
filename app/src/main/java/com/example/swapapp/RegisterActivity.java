@@ -13,7 +13,7 @@ import com.example.swapapp.db.DBHelper;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText username, password, repassword;
+    EditText firstname, lastname, username, password, repassword;
     Button signup, signin;
     DBHelper db;
 
@@ -22,6 +22,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        firstname = (EditText) findViewById(R.id.firstname);
+        lastname = (EditText) findViewById(R.id.lastname);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         repassword = (EditText) findViewById(R.id.repassword);
@@ -33,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String fName = firstname.getText().toString();
+                String lName = lastname.getText().toString();
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
@@ -42,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     if(pass.equals(repass)){
                         if(!db.checkusername(user)){
-                            if(db.insertData(user, pass)){
+                            if(db.insertData(user, pass, fName, lName)){
                                 Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(i);

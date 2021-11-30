@@ -6,7 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 import androidx.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.swapapp.models.Item;
+
+import java.util.ArrayList;
 
 public class DBItemHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "Item.db";
@@ -41,15 +47,24 @@ public class DBItemHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public String findItem(int user_id, int item_id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from items where user_id="+user_id+" AND item_id="+item_id, null );
+    public ArrayList<Item> findUserItems(String uuid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery("Select name, description from items where user_id = ?", new String[]{uuid});
 
-        String itemName="";
-        if (res.moveToFirst()){
-            itemName = res.getString(res.getColumnIndex("name"));
+        ArrayList<Item> userItems = null;
+        if(result.getCount() != 0)
+        {
+            while (result.moveToNext())
+            {
+                int id = result.getInt(0);
+                String name = result.getString(1);
+                String description = result.getString(2);
+                userItems.add(new Item(name, description, 0));
+            }
         }
-        return itemName;
+
+        return userItems;
+
     }
 
 

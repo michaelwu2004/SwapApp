@@ -7,11 +7,29 @@
     tools:context=".RegisterActivity">
 
     <EditText
+        android:id="@+id/firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter First Name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below='@+id/firstname'
+        android:hint="Enter Last Name"
+        app:layout_constraintTop_toBottomOf="@+id/firstname"
+        />
+
+    <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below='@+id/lastname'
         android:hint="Enter User"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/lastname"
+        />
 
     <EditText
         android:id="@+id/password"

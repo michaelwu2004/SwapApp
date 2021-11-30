@@ -12,6 +12,7 @@ import java.util.UUID;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.swapapp.MainActivity;
 import com.example.swapapp.models.Item;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -43,6 +44,8 @@ public class DBHelper extends SQLiteOpenHelper {
         //make a uiud section over here or smth
         contentValues.put("user_id", uuid);
 
+        MainActivity.user_id = uuid;
+
         long result = db.insert("users", null, contentValues);
 
         if(result==-1) return false;
@@ -60,13 +63,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean checkusernamepassword(String username, String password){
+    public String checkusernamepassword(String username, String password){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, password});
+        Cursor cursor = db.rawQuery("Select user_id from users where username = ? and password = ?", new String[]{username, password});
+
         if(cursor.getCount() > 0){
-            return true;
+            // broken
+            return cursor.getString(0);
         } else {
-            return false;
+            return null;
         }
     }
 

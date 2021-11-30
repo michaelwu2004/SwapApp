@@ -15,6 +15,7 @@ import com.example.swapapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    public static String user_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

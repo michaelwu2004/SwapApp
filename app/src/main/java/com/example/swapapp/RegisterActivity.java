@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(pass.equals(repass)){
                         if(!db.checkusername(user)){
                             if(db.insertData(user, pass, fName, lName)){
-                                Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, MainActivity.user_id, Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(i);
                             } else {

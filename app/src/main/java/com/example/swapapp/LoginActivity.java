@@ -45,10 +45,13 @@ public class LoginActivity extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
+                String user_id = db.checkusernamepassword(user, pass);
+
                 if(user.equals("") || pass.equals("")){
                     Toast.makeText(LoginActivity.this, "Fill in the fields", Toast.LENGTH_SHORT).show();
-                } else if(db.checkusernamepassword(user, pass)) {
-                    Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+                } else if(user_id != null) {
+                    MainActivity.user_id = user_id;
+                    Toast.makeText(LoginActivity.this, MainActivity.user_id, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
 

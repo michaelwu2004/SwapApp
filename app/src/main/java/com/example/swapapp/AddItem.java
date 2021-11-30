@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.swapapp.db.DBItemHelper;
 import com.example.swapapp.models.Item;
 import com.example.swapapp.ui.profile.ProfileViewModel;
 
@@ -29,6 +30,10 @@ public class AddItem extends AppCompatActivity {
       public void onClick(View v) {
         Item newItem = new Item(textName.getText().toString(), textDescription.getText().toString(), 0);
         ProfileViewModel.addItem(newItem);
+
+        DBItemHelper helper = new DBItemHelper(AddItem.this);
+//        helper.insertData(textName.getText().toString(), textDescription.getText().toString(), 0, 0);
+        finish();
       }
     });
   }

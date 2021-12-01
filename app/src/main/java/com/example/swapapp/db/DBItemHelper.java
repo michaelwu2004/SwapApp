@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.swapapp.models.Item;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class DBItemHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "Item.db";
@@ -21,6 +22,9 @@ public class DBItemHelper extends SQLiteOpenHelper {
         super(context, "Item.db", null, 1);
     }
 
+
+    //if any of us can figure it out make img included for the db if not is ok
+    //image BLOB
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create Table items(name TEXT, description TEXT,  user_id INT, item_id INT)");
@@ -32,13 +36,15 @@ public class DBItemHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(String name, String description, int userid, int itemid){
+    public boolean insertData(String name, String description, String userid){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("description", description);
         contentValues.put("user_id", userid);
-        contentValues.put("item_id", itemid);
+        String uuid = UUID.randomUUID().toString();
+        contentValues.put("item_id", uuid);
+        //contentValues.put("image", image);
 
         long result = db.insert("items", null, contentValues);
 
@@ -69,4 +75,3 @@ public class DBItemHelper extends SQLiteOpenHelper {
 
 
 }
-

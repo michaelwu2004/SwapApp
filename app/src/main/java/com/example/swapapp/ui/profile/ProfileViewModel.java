@@ -16,9 +16,9 @@ public class  ProfileViewModel extends ViewModel {
 
     ArrayList<Item> tempItems = new ArrayList<>();
     // fish out of database here
-    tempItems.add(new Item("PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
-    tempItems.add(new Item("PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
-    tempItems.add(new Item("PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
+    tempItems.add(new Item("FAKEID","PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
+    tempItems.add(new Item("FAKEID","PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
+    tempItems.add(new Item("FAKEID","PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
     this.items.setValue(tempItems);
   }
 

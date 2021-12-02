@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.swapapp.models.Item;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -27,7 +30,7 @@ public class DBItemHelper extends SQLiteOpenHelper {
     //image BLOB
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table items(name TEXT, description TEXT,  user_id INT, item_id INT)");
+        db.execSQL("create Table items(name TEXT, description TEXT,  user_id INT, item_id INT, image BLOB)");
     }
 
     @Override
@@ -36,7 +39,15 @@ public class DBItemHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(String name, String description, String userid){
+
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
+    }
+
+    public boolean insertData(String name, String description, String userid, Bitmap imageBitMap){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -44,7 +55,9 @@ public class DBItemHelper extends SQLiteOpenHelper {
         contentValues.put("user_id", userid);
         String uuid = UUID.randomUUID().toString();
         contentValues.put("item_id", uuid);
-        //contentValues.put("image", image);
+
+        byte[] imageAsBytes = getBitmapAsByteArray(imageBitMap);
+        contentValues.put("image", imageAsBytes);
 
         long result = db.insert("items", null, contentValues);
 
@@ -62,15 +75,24 @@ public class DBItemHelper extends SQLiteOpenHelper {
         {
             while (result.moveToNext())
             {
-                int id = result.getInt(0);
+                String id = result.getString(4);
                 String name = result.getString(1);
                 String description = result.getString(2);
-                userItems.add(new Item(name, description, 0));
+                byte[] imageAsBytes = result.getBlob(5);
+
+                //TO-DO ADD TO ITEMFIELD
+                Bitmap imageAsBitmap = getImage(imageAsBytes);
+
+                userItems.add(new Item(id, name, description, 0));
             }
         }
 
         return userItems;
 
+    }
+
+    public Bitmap getImage(byte[] imageAsBytes){
+            return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
 

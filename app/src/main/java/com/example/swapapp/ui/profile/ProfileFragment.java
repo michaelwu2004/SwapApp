@@ -17,6 +17,7 @@ import com.example.swapapp.AddItem;
 import com.example.swapapp.InventoryListingAdapter;
 import com.example.swapapp.MainActivity;
 import com.example.swapapp.databinding.FragmentProfileBinding;
+import com.example.swapapp.db.DBItemHelper;
 import com.example.swapapp.models.Item;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,6 +34,9 @@ public class ProfileFragment extends Fragment {
 
     ListView inventoryListView = binding.profileInventoryList;
     Button fab = binding.addItemBtn;
+
+    DBItemHelper dbItemHelper = new DBItemHelper(getActivity());
+    dbItemHelper.findUserItems(MainActivity.user_id);
 
     fab.setOnClickListener(new View.OnClickListener() {
       @Override

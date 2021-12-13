@@ -1,5 +1,6 @@
 package com.example.swapapp;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,7 @@ public class AddItem extends AppCompatActivity {
         ProfileViewModel.addItem(newItem);
 
         DBItemHelper helper = new DBItemHelper(AddItem.this);
-//        helper.insertData(textName.getText().toString(), textDescription.getText().toString(), 0, 0);
+        helper.insertData(textName.getText().toString(), textDescription.getText().toString(), MainActivity.user_id);
         finish();
       }
     });

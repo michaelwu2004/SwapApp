@@ -87,7 +87,7 @@ public class ImageUpload extends AppCompatActivity {
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
 
-                if(itemDB.insertData(imageName, imageDesc, MainActivity.user_id, bitmap)){
+                if(itemDB.insertData(imageName, imageDesc, MainActivity.user_id /*,bitmap*/)){
                     Toast.makeText(ImageUpload.this, "success", Toast.LENGTH_SHORT).show();
 
                 } else {

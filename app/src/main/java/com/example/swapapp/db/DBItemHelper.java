@@ -47,7 +47,7 @@ public class DBItemHelper extends SQLiteOpenHelper {
         return outputStream.toByteArray();
     }
 
-    public boolean insertData(String name, String description, String userid, Bitmap imageBitMap){
+    public boolean insertData(String name, String description, String userid/*, Bitmap bitmap */){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -56,8 +56,8 @@ public class DBItemHelper extends SQLiteOpenHelper {
         String uuid = UUID.randomUUID().toString();
         contentValues.put("item_id", uuid);
 
-        byte[] imageAsBytes = getBitmapAsByteArray(imageBitMap);
-        contentValues.put("image", imageAsBytes);
+//        byte[] imageAsBytes = getBitmapAsByteArray(imageBitMap);
+//        contentValues.put("image", imageAsBytes);
 
         long result = db.insert("items", null, contentValues);
 

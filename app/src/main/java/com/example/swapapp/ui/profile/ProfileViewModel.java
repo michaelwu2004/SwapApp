@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.swapapp.db.DBItemHelper;
 import com.example.swapapp.models.Item;
 
 import java.util.ArrayList;
@@ -15,10 +16,7 @@ public class  ProfileViewModel extends ViewModel {
     this.items = new MutableLiveData<>();
 
     ArrayList<Item> tempItems = new ArrayList<>();
-    // fish out of database here
-    tempItems.add(new Item("FAKEID","PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
-    tempItems.add(new Item("FAKEID","PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
-    tempItems.add(new Item("FAKEID","PC", "A new computesdjadkasnndakjdnskdnsdjjdksdasjdskdjsdjsbdsiodbasiuasbduisidusabduibdasbuiasx`r", 0));
+
     this.items.setValue(tempItems);
   }
 

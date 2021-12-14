@@ -51,7 +51,7 @@ public class DBItemHelper extends SQLiteOpenHelper {
         return outputStream.toByteArray();
     }
 
-    public boolean insertData(String name, String description, String userid/*, Bitmap bitmap */){
+    public boolean insertData(String name, String description, String userid, Bitmap imageBitMap){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -60,8 +60,8 @@ public class DBItemHelper extends SQLiteOpenHelper {
         String uuid = UUID.randomUUID().toString();
         contentValues.put("item_id", uuid);
 
-//        byte[] imageAsBytes = getBitmapAsByteArray(imageBitMap);
-//        contentValues.put("image", imageAsBytes);
+        byte[] imageAsBytes = getBitmapAsByteArray(imageBitMap);
+        contentValues.put("image", imageAsBytes);
 
         long result = db.insert("items", null, contentValues);
 
@@ -79,15 +79,16 @@ public class DBItemHelper extends SQLiteOpenHelper {
         {
             while (result.moveToNext())
             {
-                //String id = result.getString(3);
+                // TODO: FIX INDEXING
+                String id = result.getString(3);
                 String name = result.getString(0);
                 String description = result.getString(1);
-                //byte[] imageAsBytes = result.getBlob(5);
+                byte[] imageAsBytes = result.getBlob(4);
 
                 //TO-DO ADD TO ITEMFIELD
-                //Bitmap imageAsBitmap = getImage(imageAsBytes);
+                Bitmap imageAsBitmap = getImage(imageAsBytes);
 
-                userItems.add(new Item(/*id,*/ name, description, 0));
+                userItems.add(new Item(id, name, description, imageAsBitmap));
 
             }
             Log.d("Success", "Items have been put in");

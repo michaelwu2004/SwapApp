@@ -1,18 +1,20 @@
 package com.example.swapapp.models;
 
+import android.graphics.Bitmap;
+
 public class Item {
   public String _id;
   private String name;
   private String description;
-  private int image;
+  private Bitmap image;
 
-  public Item(String name, String description, int image) {
+  public Item(String name, String description, Bitmap image) {
     this.name = name;
     this.description = description;
     this.image = image;
   }
 
-  public Item(String id, String name, String description, int image) {
+  public Item(String id, String name, String description, Bitmap image) {
     this._id = id;
     this.name = name;
     this.description = description;
@@ -27,7 +29,7 @@ public class Item {
     return this.description;
   }
 
-  public int getImage() {
+  public Bitmap getImage() {
     return this.image;
   }
 

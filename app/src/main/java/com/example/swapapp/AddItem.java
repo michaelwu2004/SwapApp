@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ public class AddItem extends AppCompatActivity {
     this.mAddImageBtn = findViewById(R.id.add_image);
     this.textName = findViewById(R.id.item_name);
     this.textDescription = findViewById(R.id.item_description);
+    this.imageView = findViewById(R.id.itemimage);
 
     this.mAddImageBtn.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -57,12 +59,15 @@ public class AddItem extends AppCompatActivity {
     this.mAddItemBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Item newItem = new Item(textName.getText().toString(), textDescription.getText().toString(), 0);
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        Item newItem = new Item(textName.getText().toString(), textDescription.getText().toString(), bitmap);
         ProfileViewModel.addItem(newItem);
 
         DBItemHelper helper = new DBItemHelper(AddItem.this);
 
-        if(helper.insertData(textName.getText().toString(), textDescription.getText().toString(), MainActivity.user_id /*,bitmap*/)){
+        if(helper.insertData(textName.getText().toString(), textDescription.getText().toString(), MainActivity.user_id, bitmap)){
           Toast.makeText(AddItem.this, "success", Toast.LENGTH_SHORT).show();
 
         } else {

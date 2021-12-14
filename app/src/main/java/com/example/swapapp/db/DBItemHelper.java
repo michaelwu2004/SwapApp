@@ -7,12 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.swapapp.AddItem;
 import com.example.swapapp.models.Item;
+import com.example.swapapp.ui.profile.ProfileViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -70,21 +74,24 @@ public class DBItemHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor result = db.rawQuery("Select name, description from items where user_id = ?", new String[]{uuid});
 
-        ArrayList<Item> userItems = null;
+        ArrayList<Item> userItems = new ArrayList<Item>();
         if(result.getCount() != 0)
         {
             while (result.moveToNext())
             {
-                String id = result.getString(4);
-                String name = result.getString(1);
-                String description = result.getString(2);
-                byte[] imageAsBytes = result.getBlob(5);
+                //String id = result.getString(3);
+                String name = result.getString(0);
+                String description = result.getString(1);
+                //byte[] imageAsBytes = result.getBlob(5);
 
                 //TO-DO ADD TO ITEMFIELD
-                Bitmap imageAsBitmap = getImage(imageAsBytes);
+                //Bitmap imageAsBitmap = getImage(imageAsBytes);
 
-                userItems.add(new Item(id, name, description, 0));
+                userItems.add(new Item(/*id,*/ name, description, 0));
+
             }
+            Log.d("Success", "Items have been put in");
+            ProfileViewModel.items.setValue(userItems);
         }
 
         return userItems;

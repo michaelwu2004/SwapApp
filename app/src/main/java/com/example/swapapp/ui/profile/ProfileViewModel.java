@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.swapapp.AddItem;
 import com.example.swapapp.db.DBItemHelper;
 import com.example.swapapp.models.Item;
 

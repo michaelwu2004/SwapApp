@@ -40,6 +40,11 @@ public class AddItem extends AppCompatActivity {
     this.textDescription = findViewById(R.id.item_description);
     this.imageView = findViewById(R.id.itemimage);
 
+    setOnClickListeners();
+
+  }
+
+  public void setOnClickListeners(){
     this.mAddImageBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -76,7 +81,6 @@ public class AddItem extends AppCompatActivity {
         finish();
       }
     });
-
   }
 
   @Override

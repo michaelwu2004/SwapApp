@@ -68,7 +68,9 @@ public class InventoryListingAdapter implements ListAdapter {
       description.setText(itemData.getDescription());
 
       ImageView image = convertView.findViewById(R.id.trade_listing_user_icon);
-      Glide.with(this.mContext).load(R.drawable.adrian_yan).into(image);
+      Glide.with(this.mContext).load(itemData.getImage()).into(image);
+
+
     }
 
     return convertView;

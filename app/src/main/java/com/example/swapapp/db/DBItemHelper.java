@@ -72,7 +72,7 @@ public class DBItemHelper extends SQLiteOpenHelper {
 
     public ArrayList<Item> findUserItems(String uuid){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("Select name, description from items where user_id = ?", new String[]{uuid});
+        Cursor result = db.rawQuery("Select name, description, user_id, image from items where user_id = ?", new String[]{uuid});
 
         ArrayList<Item> userItems = new ArrayList<Item>();
         if(result.getCount() != 0)
@@ -80,10 +80,10 @@ public class DBItemHelper extends SQLiteOpenHelper {
             while (result.moveToNext())
             {
                 // TODO: FIX INDEXING
-                String id = result.getString(3);
+                String id = result.getString(2);
                 String name = result.getString(0);
                 String description = result.getString(1);
-                byte[] imageAsBytes = result.getBlob(4);
+                byte[] imageAsBytes = result.getBlob(3);
 
                 //TO-DO ADD TO ITEMFIELD
                 Bitmap imageAsBitmap = getImage(imageAsBytes);

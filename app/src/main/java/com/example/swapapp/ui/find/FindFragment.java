@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.swapapp.MainActivity;
 import com.example.swapapp.TradeListingAdapter;
 import com.example.swapapp.databinding.FragmentFindBinding;
 import com.example.swapapp.models.TradeListing;
@@ -30,10 +31,8 @@ public class FindFragment extends Fragment {
 
     ListView listingListView = binding.tradeListingList;
     ArrayList<TradeListing> tempTradeListings = new ArrayList<>();
-    tempTradeListings.add(new TradeListing(new User("Matthew", "Chen")));
-    tempTradeListings.add(new TradeListing(new User("Matthew", "Chen")));
-    tempTradeListings.add(new TradeListing(new User("Matthew", "Chen")));
-    tempTradeListings.add(new TradeListing(new User("Matthew", "Chen")));
+    tempTradeListings.add(new TradeListing(MainActivity.otherUser));
+
 
     TradeListingAdapter tradeListingAdapter = new TradeListingAdapter(getActivity(), tempTradeListings);
     listingListView.setAdapter(tradeListingAdapter);

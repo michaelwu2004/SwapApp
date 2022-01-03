@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
     Button fab = binding.addItemBtn;
 
     DBItemHelper dbItemHelper = new DBItemHelper(getActivity());
-    dbItemHelper.findUserItems(MainActivity.user_id);
+    dbItemHelper.findUserItems(MainActivity.user_id, "PROFILE");
 
     fab.setOnClickListener(new View.OnClickListener() {
       @Override

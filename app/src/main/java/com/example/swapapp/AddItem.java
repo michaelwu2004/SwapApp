@@ -68,7 +68,7 @@ public class AddItem extends AppCompatActivity {
         Bitmap bitmap = drawable.getBitmap();
 
         Item newItem = new Item(textName.getText().toString(), textDescription.getText().toString(), bitmap);
-        ProfileViewModel.addItem(newItem);
+        //ProfileViewModel.addItem(newItem);
 
         DBItemHelper helper = new DBItemHelper(AddItem.this);
 

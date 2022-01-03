@@ -80,7 +80,12 @@ public class InventoryListingAdapter implements ListAdapter {
   public int getItemViewType(int position) { return position; }
 
   @Override
-  public int getViewTypeCount() { return this.mIventoryList.size(); }
+  public int getViewTypeCount() {
+
+    if(this.mIventoryList.size()==0) return 1;
+    return this.mIventoryList.size();
+
+  }
 
   @Override
   public boolean isEmpty() { return false; }

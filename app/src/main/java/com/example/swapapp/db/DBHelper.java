@@ -14,6 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.swapapp.MainActivity;
 import com.example.swapapp.models.Item;
+import com.example.swapapp.models.User;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "login.db";
@@ -53,6 +54,24 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    public boolean insertDummyData(User other, String user_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        //insert data
+        contentValues.put("username", "123");
+        contentValues.put("password", "123");
+        contentValues.put("firstname", other.getFirstName());
+        contentValues.put("lastname", other.getLastName());
+        contentValues.put("user_id", other.getID());
+
+        long result = db.insert("users", null, contentValues);
+
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
     public boolean checkusername(String username){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where username = ?", new String[]{username});
@@ -77,9 +96,27 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public String findFirstName(String uuid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select firstname from users where user_id = ?", new String[]{uuid});
+        return cursor.toString();
+    }
+
+    public String findLastName(String uuid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select lastname from users where user_id = ?", new String[]{uuid});
+        return cursor.toString();
+    }
+
     public String findUser(String uuid){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where uuid = ?", new String[]{uuid});
+        return cursor.toString();
+    }
+
+    public String getUuidFromUser(String user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select user_id from users where username = ?", new String[]{user});
         return cursor.toString();
     }
 
@@ -87,8 +124,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public void find(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users ", new String[]{});
-
     }
+
+
 
 }
 

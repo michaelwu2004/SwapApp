@@ -33,4 +33,13 @@ public class  ProfileViewModel extends ViewModel {
 
     return true;
   }
+
+  public static boolean removeItem(Item item){
+    ArrayList<Item> cloneItems = getItems().getValue();
+
+    cloneItems.remove(item);
+    items.setValue(cloneItems);
+
+    return true;
+  }
 }
